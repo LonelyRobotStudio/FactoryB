@@ -1,0 +1,1 @@
+FactoryB is a fixture solution for nodejs using simple JSON storing and mutating. Its inspired by frustrations with Node.js fixture solutions that themselves were inspired by Factory_Girl from ThoughtBot.
