@@ -2,7 +2,7 @@
   "name": "Factory_B",
   "version": "0.0.1",
   "description": "FactoryB is a fixture solution for nodejs using simple JSON storing and mutating. Its inspired by frustrations with Node.js fixture solutions that themselves were inspired by Factory_Girl from ThoughtBot.",
-  "main": "src/",
+  "main": "app/index.js",
   "scripts": { 
     "test": "jasmine-node --coffee spec"
   },
