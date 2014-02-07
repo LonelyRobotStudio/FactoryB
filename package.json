@@ -1,18 +1,24 @@
 {
-  "name": "Factory_B",
+  "name": "FactoryB",
   "version": "0.0.1",
   "description": "FactoryB is a fixture solution for nodejs using simple JSON storing and mutating. Its inspired by frustrations with Node.js fixture solutions that themselves were inspired by Factory_Girl from ThoughtBot.",
   "main": "app/index.js",
   "scripts": { 
-    "test": "jasmine-node --coffee spec"
-  },
+    "prepublish": "grunt",
+    "test": "grunt test" },
   "keywords": [
     "fixtures",
     "factories",
-    "testing"
-  ],
-  "author": "TehNatha",
-  "license": "BSD-2-Clause",
+    "testing" ],
+  "homepage": "http://github.com/LonelyRobotStudio/FactoryB",
+  "author": {
+    "name": "TehNatha",
+    "email": "TehNatha@lonelyrobotstudio.com",
+    "url": "tehnatha.lonelyrobotstudio.com" },
+  "repository": {
+    "type" : "git",
+    "url" : "ssh://git@github.com:LonelyRobotStudio/FactoryB.git" },
+  "license": "MIT",
   "devDependencies": {
     "coffee-script": "~1.7.1",
     "grunt": "~0.4.2",
@@ -21,6 +27,4 @@
     "grunt-jasmine-bundle": "~0.1.4",
     "grunt-contrib-clean": "~0.5.0",
     "coffeelint": "~1.0.7",
-    "grunt-contrib-watch": "~0.5.3"
-  }
-}
+    "grunt-contrib-watch": "~0.5.3" } }
