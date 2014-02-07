@@ -8,8 +8,8 @@ module.exports = (grunt)->
           dest: 'app/index.js' ]
       test:
         files: [
-          src: 'spec/spec.coffee'
-          dest: 'test/spec.js' ]
+          src: 'spec/factory-b-spec.coffee'
+          dest: 'test/factory-b-spec.js' ]
     coffeelint:
       app: ['src/index.coffee']
       test: ['spec/spec.coffee']
