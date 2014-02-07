@@ -3,7 +3,10 @@ describe "Truth", ->
     expect(true).toBeTruthy()
 
 describe 'Factory B', ->
-  FactoryB = require '../src'
+  try
+    FactoryB = require '../src'
+  catch
+    FactoryB = require '../app'
 
   describe 'has a constructor that', ->
 
