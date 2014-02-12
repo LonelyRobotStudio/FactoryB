@@ -123,3 +123,4 @@ Future Features
 - Knowing how its model should be instantiated
 - Knowing how its model should be saved
 - Object relationship handling
+- Mutators saved as traits
