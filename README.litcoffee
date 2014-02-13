@@ -40,7 +40,7 @@ and then retrieving that JSON object with `get()`.
 
     console.log bee.get()
 
-    > {fire: 'hot', ice: 'cold'}
+    # OUTPUT> {fire: 'hot', ice: 'cold'}
 
 
 
@@ -78,15 +78,15 @@ and then retrieve it using those keys:
 
     console.log bee.get('oppositeWorld')
 
-    > {fire: 'cold', ice: 'hot'}
+    # OUTPUT> {fire: 'cold', ice: 'hot'}
 
 `'default'` can still be accessed just like before:
 
     console.log bee.get()
     console.log bee.get('default')
 
-    > {fire: 'hot', ice: 'cold'}
-    > {fire: 'hot', ice: 'cold'}
+    # OUTPUT> {fire: 'hot', ice: 'cold'}
+    # OUTPUT> {fire: 'hot', ice: 'cold'}
 
 
 
@@ -105,9 +105,9 @@ Retrieval is the same:
     console.log bee.get('default')
     console.log bee.get('oppositeWorld')
 
-    > {fire: 'hot', ice: 'cold'}
-    > {fire: 'hot', ice: 'cold'}
-    > {fire: 'cold', ice: 'hot'}
+    # OUTPUT> {fire: 'hot', ice: 'cold'}
+    # OUTPUT> {fire: 'hot', ice: 'cold'}
+    # OUTPUT> {fire: 'cold', ice: 'hot'}
 
 
 
@@ -118,23 +118,23 @@ FactoryB's `get()` method will accept a JSON object with values to change for th
 
     console.log bee.get('oppositeWorld', fire: 'DARK')
 
-    > {fire: 'DARK', ice: 'hot'}
+    # OUTPUT> {fire: 'DARK', ice: 'hot'}
 
 FactoryB protects your objects from being passed by reference. The JSON you give FactoryB is cloned before `set()` saves and when `get()` retrieves; so, changes do *not* affect either FactoryB's state *or* any of the arguments you pass it.
 
     console.log jsonArgument2
     console.log bee.get('oppositeWorld')
 
-    > {fire: 'cold', ice: 'hot'}
-    > {fire: 'cold', ice: 'hot'}
+    # OUTPUT> {fire: 'cold', ice: 'hot'}
+    # OUTPUT> {fire: 'cold', ice: 'hot'}
 
 When given JSON without a key, `get()` retrieves what is under the `'default'` key and changes it accordingly:
 
     console.log bee.get()
     console.log bee.get(ice: 'MELTED')
 
-    > {fire: 'hot', ice: 'cold'}
-    > {fire: 'hot', ice: 'MELTED'}
+    # OUTPUT> {fire: 'hot', ice: 'cold'}
+    # OUTPUT> {fire: 'hot', ice: 'MELTED'}
 
 
 
