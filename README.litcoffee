@@ -5,17 +5,20 @@
 
 About FactoryB
 ==============
-FactoryB is a fixture solution for Nodejs using simple JSON object storing and
-mutating. FactoryB inspired by frustrations with Node.js fixture solutions
-that themselves were inspired by Factory_Girl from ThoughtBot.
 
-FactoryB right now does two simple things. It stores JSON under string keys and
-allows you to apply changes to them when you retrieve them.
+FactoryB is a fixture solution for Node.js using simple JSON object storing and mutating. FactoryB is inspired by frustrations with other Node.js fixture solutions that, themselves, were inspired by Factory_Girl (from ThoughtBot).
 
--------------------------------------------------------------------------------
+FactoryB is a dictionary that does two simple things:
+
+1. It stores JSON objects under string keys and
+2. Allows you to apply changes to those objects when you retrieve them.
+
+The following examples are provided in CoffeeScript.
+
+
 
 Simple Usage
-============
+------------
 
 The simplest way you can use FactoryB is requiring it,
   
@@ -25,22 +28,26 @@ instantiating an instance without arguments,
 
     bee = new FactoryB
 
-using its set method with one JSON argument,
+using its `set()` method with one JSON argument,
 
     jsonArgument = 
-      fire: 'fire'
+      fire: 'hot'
       ice: 'cold'
 
     bee.set jsonArgument
 
-and then retrieving that JSON with get.
+and then retrieving that JSON object with `get()`.
 
     console.log bee.get()
 
-Storing More Than One JSON object
-=================================
+    > {fire: 'hot', ice: 'cold'}
 
-FactoryB stores JSON under the key 'default' when it is not given a key.
+
+
+Storing More Than One JSON Object
+---------------------------------
+
+FactoryB stores JSON dictionary entries under the key `'default'` when it is not given a key.
 So the following:
 
     bee = new FactoryB
@@ -51,72 +58,88 @@ is the same as:
     bee = new FactoryB
     bee.set 'default', jsonArgument
 
-Likewise, FactoryB's get uses the 'default' key when not given a key.
-so the following:
+Likewise, FactoryB's `get()` uses the `'default'` key when not given a key. So, the following:
 
-    console.log bee.get()
+    bee.get
 
 is the same as:
 
-    console.log bee.get('default')
+    bee.get 'default'
 
 If we want to store more JSON we can store it under other keys,
 
     jsonArgument2 = 
       fire: 'cold'
-      ice: 'fire'
+      ice: 'hot'
 
     bee.set 'oppositeWorld', jsonArgument2
 
-and then retrieve it using that key:
+and then retrieve it using those keys:
 
     console.log bee.get('oppositeWorld')
 
-'default' can still be accessed just like before:
+    > {fire: 'cold', ice: 'hot'}
+
+`'default'` can still be accessed just like before:
 
     console.log bee.get()
     console.log bee.get('default')
 
-Setting JSON  With The Contructor
-=================================
+    > {fire: 'hot', ice: 'cold'}
+    > {fire: 'hot', ice: 'cold'}
 
-FactoryB's constructor will also accept a JSON object,
+
+
+Setting JSON with the Contructor
+--------------------------------
+
+FactoryB's constructor will also accept a JSON object, using its keys and subobject values to populate the dictionary:
   
     bee = new FactoryB
       default: jsonArgument
       oppositeWorld: jsonArgument2
 
-using its keys and subobjects to populate itself:
+Retrieval is the same:
 
     console.log bee.get()
     console.log bee.get('default')
     console.log bee.get('oppositeWorld')
 
-Changing JSON Through The Get method
-====================================
+    > {fire: 'hot', ice: 'cold'}
+    > {fire: 'hot', ice: 'cold'}
+    > {fire: 'cold', ice: 'hot'}
 
-FactoryB's get method will accept a JSON object with values to change for keys
-in the returned JSON:
 
-    console.log bee.get('oppositeWorld')
-    console.log bee.get('oppositeWorld', fire: 'ice')
 
-The JSON you give FactoryB is cloned before set saves and when get retrieves.
-So changes do not affect FactoryB or the original object:
+Changing JSON Through the `get()` Method
+----------------------------------------
+
+FactoryB's `get()` method will accept a JSON object with values to change for the keys provided. The returned JSON will reflect the change.
+
+    console.log bee.get('oppositeWorld', fire: 'DARK')
+
+    > {fire: 'DARK', ice: 'hot'}
+
+FactoryB protects your objects from being passed by reference. The JSON you give FactoryB is cloned before `set()` saves and when `get()` retrieves; so, changes do *not* affect either FactoryB's state *or* any of the arguments you pass it.
 
     console.log jsonArgument2
     console.log bee.get('oppositeWorld')
 
-When not given a key and just JSON get retrieves what is under the 'default'
-key and changes it according to the JSON:
+    > {fire: 'cold', ice: 'hot'}
+    > {fire: 'cold', ice: 'hot'}
+
+When given JSON without a key, `get()` retrieves what is under the `'default'` key and changes it accordingly:
 
     console.log bee.get()
-    console.log bee.get(ice: 'melted')
+    console.log bee.get(ice: 'MELTED')
 
--------------------------------------------------------------------------------
+    > {fire: 'hot', ice: 'cold'}
+    > {fire: 'hot', ice: 'MELTED'}
+
+
 
 Future Features
-===============
+---------------
 
 - Iterators
 - Knowing its model
