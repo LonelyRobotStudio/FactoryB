@@ -77,7 +77,7 @@ and then retrieve it using that key:
     console.log bee.get()
     console.log bee.get('default')
 
-Setting JSON  With The Contructor
+Setting JSON  With The Constructor
 =================================
 
 FactoryB's constructor will also accept a JSON object,
