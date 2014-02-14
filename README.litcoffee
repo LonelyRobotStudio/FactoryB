@@ -88,9 +88,7 @@ and then retrieve it using those keys:
     # OUTPUT> {fire: 'hot', ice: 'cold'}
     # OUTPUT> {fire: 'hot', ice: 'cold'}
 
-
-
-Setting JSON with the Contructor
+Setting JSON with the Constructor
 --------------------------------
 
 FactoryB's constructor will also accept a JSON object, using its keys and subobject values to populate the dictionary:
