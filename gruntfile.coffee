@@ -27,6 +27,7 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-notify'
+  grunt.loadNpmTasks 'grunt-release'
   grunt.registerTask 'lint', ['coffeelint']
   grunt.registerTask 'test', ['spec']
   grunt.registerTask 'build', ['coffee:app']
