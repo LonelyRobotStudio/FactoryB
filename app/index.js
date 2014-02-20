@@ -36,20 +36,10 @@
     };
 
     clone = function(data) {
-      var key, result, value;
       if (data == null) {
         data = {};
       }
-      result = {};
-      for (key in data) {
-        value = data[key];
-        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || value === null) {
-          result[key] = value;
-        } else {
-          result[key] = clone(data[key], value);
-        }
-      }
-      return result;
+      return JSON.parse(JSON.stringify(data));
     };
 
     FactoryB.prototype.set = function(key, data) {
