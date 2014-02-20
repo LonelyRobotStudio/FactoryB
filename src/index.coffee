@@ -16,14 +16,7 @@ module.exports = class FactoryB
     return data
 
   clone = (data = {})->
-    result = {}
-    for key, value of data
-      if typeof value is 'string' or typeof value is 'number' \
-      or typeof value is'boolean' or value is null
-        result[key] = value
-      else
-        result[key] = clone(data[key], value)
-    return result
+    JSON.parse JSON.stringify(data)
 
   set: (key, data)->
     if typeof key isnt 'string' and typeof key is 'object' and key isnt null
