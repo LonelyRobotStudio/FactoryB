@@ -28,6 +28,8 @@
         value = mutator[key];
         if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || value === null) {
           data[key] = value;
+        } else if (value instanceof Date) {
+          data[key] = new Date(value);
         } else {
           data[key] = mutate(data[key], value);
         }

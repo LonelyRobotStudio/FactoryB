@@ -116,3 +116,13 @@ describe 'Factory B', ->
 
   it 'should have a method to get the keys for the JSON objects it stores', ->
     bee = new FactoryB
+
+  describe 'had bugs such that', ->
+
+    it 'Mutator does not accept a Date (#8)', ->
+      json = live: 'forever'
+      mutator = live: new Date
+      bee = new FactoryB
+      bee.set(json)
+      result = bee.get(mutator)
+      expect(result).toEqual mutator

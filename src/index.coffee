@@ -9,8 +9,10 @@ module.exports = class FactoryB
   mutate = (data = {}, mutator)->
     for key, value of mutator
       if typeof value is 'string' or typeof value is 'number' \
-      or typeof value is'boolean' or value is null
+      or typeof value is 'boolean' or value is null
         data[key] = value
+      else if value instanceof Date
+        data[key] = new Date value
       else
         data[key] = mutate(data[key], value)
     return data
