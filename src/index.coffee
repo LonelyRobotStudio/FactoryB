@@ -38,11 +38,10 @@ module.exports = class FactoryB
     return cloneObject obj if obj instanceof Object
     throw new Error "Unable to copy object! Its type isn't supported."
 
-  set: (key, data)->
-    if typeof key isnt 'string' and typeof key is 'object' and key isnt null
-      data = clone(key)
+  set: (key = 'default', data)->
+    if key instanceof Object and key instanceof String isnt true
+      data = clone key
       key = 'default'
-    @data[key] = clone(data) if data isnt null
 
   get: (key = 'default', mutator = {})->
     if typeof key isnt 'string'
