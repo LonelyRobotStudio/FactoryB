@@ -164,7 +164,7 @@ order given.
 
     # OUTPUT> {fire: 'HOT', ice: 'melted'}
 
-When given it doesn't get a key first, it still assumes changes are to default.
+When it doesn't get a key first, it still assumes changes are to default.
 
     console.log bee.get(time, reignite)
 
