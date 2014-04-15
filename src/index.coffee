@@ -49,4 +49,4 @@ module.exports = class FactoryB
       key = 'default'
     return mutate(clone(@data[key]), mutator)
 
-  keys: ()-> data.keys()
+  keys: ()-> @data.keys()
