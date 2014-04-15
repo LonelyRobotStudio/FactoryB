@@ -1,12 +1,16 @@
 [
-![Build Status](https://travis-ci.org/LonelyRobotStudio/FactoryB.png?branch=master)
+![Build Status](
+  https://travis-ci.org/LonelyRobotStudio/FactoryB.png?branch=master
+  )
 ](https://travis-ci.org/LonelyRobotStudio/FactoryB)
 
 
 About FactoryB
 ==============
 
-FactoryB is a fixture solution for Node.js using simple JSON object storing and mutating. FactoryB is inspired by frustrations with other Node.js fixture solutions that, themselves, were inspired by Factory_Girl (from ThoughtBot).
+FactoryB is a fixture solution for Node.js using simple JSON object storing and
+mutating. FactoryB is inspired by frustrations with other Node.js fixture
+solutions that, themselves, were inspired by Factory_Girl (from ThoughtBot).
 
 FactoryB is a dictionary that does two simple things:
 
@@ -21,7 +25,7 @@ Simple Usage
 ------------
 
 The simplest way you can use FactoryB is requiring it,
-  
+
     FactoryB = require 'FactoryB'
 
 instantiating an instance without arguments,
@@ -30,7 +34,7 @@ instantiating an instance without arguments,
 
 using its `set()` method with one JSON argument,
 
-    jsonArgument = 
+    jsonArgument =
       fire: 'hot'
       ice: 'cold'
 
@@ -47,7 +51,8 @@ and then retrieving that JSON object with `get()`.
 Storing More Than One JSON Object
 ---------------------------------
 
-FactoryB stores JSON dictionary entries under the key `'default'` when it is not given a key.
+FactoryB stores JSON dictionary entries under the key `'default'` when it is not
+ given a key.
 So the following:
 
     bee = new FactoryB
@@ -58,7 +63,8 @@ is the same as:
     bee = new FactoryB
     bee.set 'default', jsonArgument
 
-Likewise, FactoryB's `get()` uses the `'default'` key when not given a key. So, the following:
+Likewise, FactoryB's `get()` uses the `'default'` key when not given a key. So,
+the following:
 
     bee.get
 
@@ -68,7 +74,7 @@ is the same as:
 
 If we want to store more JSON we can store it under other keys,
 
-    jsonArgument2 = 
+    jsonArgument2 =
       fire: 'cold'
       ice: 'hot'
 
@@ -91,8 +97,9 @@ and then retrieve it using those keys:
 Setting JSON with the Constructor
 --------------------------------
 
-FactoryB's constructor will also accept a JSON object, using its keys and subobject values to populate the dictionary:
-  
+FactoryB's constructor will also accept a JSON object, using its keys and
+subobject values to populate the dictionary:
+
     bee = new FactoryB
       default: jsonArgument
       oppositeWorld: jsonArgument2
@@ -112,13 +119,16 @@ Retrieval is the same:
 Changing JSON Through the `get()` Method
 ----------------------------------------
 
-FactoryB's `get()` method will accept a JSON object with values to change for the keys provided. The returned JSON will reflect the change.
+FactoryB's `get()` method will accept a JSON object with values to change for
+the keys provided. The returned JSON will reflect the change.
 
     console.log bee.get('oppositeWorld', fire: 'DARK')
 
     # OUTPUT> {fire: 'DARK', ice: 'hot'}
 
-FactoryB protects your objects from being passed by reference. The JSON you give FactoryB is cloned before `set()` saves and when `get()` retrieves; so, changes do *not* affect either FactoryB's state *or* any of the arguments you pass it.
+FactoryB protects your objects from being passed by reference. The JSON you give
+FactoryB is cloned before `set()` saves and when `get()` retrieves; so, changes
+do *not* affect either FactoryB's state *or* any of the arguments you pass it.
 
     console.log jsonArgument2
     console.log bee.get('oppositeWorld')
@@ -126,7 +136,8 @@ FactoryB protects your objects from being passed by reference. The JSON you give
     # OUTPUT> {fire: 'cold', ice: 'hot'}
     # OUTPUT> {fire: 'cold', ice: 'hot'}
 
-When given JSON without a key, `get()` retrieves what is under the `'default'` key and changes it accordingly:
+When given JSON without a key, `get()` retrieves what is under the `'default'`
+key and changes it accordingly:
 
     console.log bee.get()
     console.log bee.get(ice: 'MELTED')
@@ -163,4 +174,3 @@ Future Features
 - Knowing how its model should be instantiated
 - Knowing how its model should be saved
 - Object relationship handling
-- Mutators saved as traits
