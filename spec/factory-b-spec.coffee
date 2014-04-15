@@ -27,14 +27,14 @@ describe 'Factory B', ->
   describe 'has a get method that', ->
 
     it 'should accept nothing and return a JSON object held under the key \'default\'', ->
-      json = 
+      json =
         frog: 'jump'
         bacon: 'delicious'
       bee = new FactoryB default: json
       expect(bee.get()).toEqual json
 
     it 'should accept a string as a key and return a JSON object held under that key', ->
-      json = 
+      json =
         frog: 'jump'
         bacon: 'delicious'
       bee = new FactoryB json: json
@@ -47,10 +47,10 @@ describe 'Factory B', ->
       json =
         ice: 'cold'
         fire: 'fire'
-      expectedJson = 
+      expectedJson =
         ice: 'melted'
         fire: 'fire'
-      mutator = 
+      mutator =
         ice: 'melted'
 
       bee = new FactoryB json: json
@@ -66,10 +66,10 @@ describe 'Factory B', ->
       json =
         ice: 'cold'
         fire: 'fire'
-      expectedJson = 
+      expectedJson =
         ice: 'melted'
         fire: 'fire'
-      mutator = 
+      mutator =
         ice: 'melted'
 
       bee = new FactoryB default: json
@@ -85,10 +85,10 @@ describe 'Factory B', ->
       json =
         ice: 'cold'
         fire: 'fire'
-      expectedJson = 
+      expectedJson =
         ice: 'melted'
         fire: 'fire'
-      mutator = 
+      mutator =
         ice: 'melted'
 
       bee = new FactoryB default: json
@@ -119,6 +119,34 @@ describe 'Factory B', ->
 			bee = new FactoryB default: json
 			iceFire = bee.get ice, fire
 			fireIce = bee.get fire, ice
+			expect(bee.get()).toEqual json
+			expect(iceFire).toEqual iceFireJson
+			expect(fireIce).toEqual fireIceJson
+
+		it 'should accept multiple keys for saved JSON objects and should return default after they are applied to it in order', ->
+			json =
+        ice: 'cold'
+        fire: 'fire'
+        pine: 'tree'
+			ice =
+				ice: 'COLD'
+				fire: 'FIRE'
+			fire =
+				fire: 'HOT'
+			iceFireJson =
+				ice: 'COLD'
+				fire: 'HOT'
+				pine: 'tree'
+			fireIceJson =
+				ice: 'COLD'
+				fire: 'FIRE'
+				pine: 'tree'
+			bee = new FactoryB
+				default: json
+				ice: ice
+				fire: fire
+			iceFire = bee.get 'default', 'ice', 'fire'
+			fireIce = bee.get 'default', 'fire', 'ice'
 			expect(bee.get()).toEqual json
 			expect(iceFire).toEqual iceFireJson
 			expect(fireIce).toEqual fireIceJson
