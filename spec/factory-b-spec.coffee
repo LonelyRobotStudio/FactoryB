@@ -98,6 +98,31 @@ describe 'Factory B', ->
       expect(result).toEqual expectedJson
       expect(result2).toEqual originalJson
 
+		it 'should accept multiple JSON objects and should return default after they are applied to it in order', ->
+			json =
+        pine: 'tree'
+        ice: 'cold'
+        fire: 'fire'
+			ice =
+				ice: 'COLD'
+				fire: 'FIRE'
+			fire =
+				fire: 'HOT'
+			iceFireJson =
+				ice: 'COLD'
+				fire: 'HOT'
+				pine: 'tree'
+			fireIceJson =
+				ice: 'COLD'
+				fire: 'FIRE'
+				pine: 'tree'
+			bee = new FactoryB default: json
+			iceFire = bee.get ice, fire
+			fireIce = bee.get fire, ice
+			expect(bee.get()).toEqual json
+			expect(iceFire).toEqual iceFireJson
+			expect(fireIce).toEqual fireIceJson
+
   describe 'has a set method that', ->
 
     it 'should accept a key as a string and a JSON object that will be retrievable with that key', ->

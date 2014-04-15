@@ -17,19 +17,41 @@ module.exports = class FactoryB
         data[key] = mutate(data[key], value)
     return data
 
-  clone = (data = {})->
-    JSON.parse JSON.stringify(data)
+  # Cloning derived from:
+  # https://stackoverflow.com/questions/728360/most-elegant-way-to-clone-a-javascript-object
+  cloneDate = (date)->
+    new Date date.getTime()
 
-  set: (key, data)->
-    if typeof key isnt 'string' and typeof key is 'object' and key isnt null
-      data = clone(key)
+  cloneArray = (array)->
+    clone value for value of array
+
+  cloneObject = (object)->
+    copy = {}
+    for key, value of object when object.hasOwnProperty(key)
+      copy[key] = clone(value)
+    return copy
+
+  clone = (obj = {})->
+    return obj if null == obj || "object" != typeof obj
+    return cloneDate obj if obj instanceof Date
+    return cloneArray obj if obj instanceof Array
+    return cloneObject obj if obj instanceof Object
+    throw new Error "Unable to copy object! Its type isn't supported."
+
+  set: (key = 'default', data)->
+    if key instanceof Object and key instanceof String isnt true
+      data = clone key
       key = 'default'
-    @data[key] = clone(data) if data isnt null
+    @data[key] = clone data if data isnt null
 
-  get: (key = 'default', mutator = {})->
-    if typeof key isnt 'string'
-      mutator = key
-      key = 'default'
-    return mutate(clone(@data[key]), mutator)
+  get: (mutators...)->
+    unless typeof mutators[0] is 'string'
+      mutators.unshift 'default'
+    mutators = for mutator in mutators
+      if typeof mutator is 'string'
+        clone @data[mutator]
+      else
+        clone mutator
+    mutators.reduce mutate
 
-  keys: ()-> data.keys()
+  keys: ()-> @data.keys()
