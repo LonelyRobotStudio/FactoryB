@@ -26,10 +26,10 @@ module.exports = class FactoryB
     clone value for value of array
 
   cloneObject = (object)->
-    clone = {}
+    copy = {}
     for key, value of object when object.hasOwnProperty(key)
-      clone[key] = clone(value)
-    return clone
+      copy[key] = clone(value)
+    return copy
 
   clone = (obj = {})->
     return obj if null == obj || "object" != typeof obj
