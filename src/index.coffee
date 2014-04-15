@@ -48,5 +48,6 @@ module.exports = class FactoryB
       mutator = key
       key = 'default'
     return mutate(clone(@data[key]), mutator)
+    @data[key] = clone data if data isnt null
 
   keys: ()-> @data.keys()
