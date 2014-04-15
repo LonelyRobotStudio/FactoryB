@@ -136,6 +136,25 @@ When given JSON without a key, `get()` retrieves what is under the `'default'` k
 
 
 
+Chaining Saved JSON as Changes to Retrieved JSON
+------------------------------------------------
+
+FactoryB's `get()` meth will accept multiple JSON objects applying them in the
+order given.
+
+    time =
+      fire: 'out'
+      ice: 'melted'
+
+    reignite =
+      fire: 'HOT'
+
+    console.log bee.get('default', time, reignite)
+
+    # OUTPUT> {fire: 'HOT', ice: 'melted'}
+
+
+
 Future Features
 ---------------
 
