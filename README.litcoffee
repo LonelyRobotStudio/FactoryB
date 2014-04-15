@@ -150,7 +150,7 @@ key and changes it accordingly:
 Chaining Saved JSON as Changes to Retrieved JSON
 ------------------------------------------------
 
-FactoryB's `get()` meth will accept multiple JSON objects applying them in the
+FactoryB's `get()` method will accept multiple JSON objects applying them in the
 order given.
 
     time =
@@ -164,6 +164,27 @@ order given.
 
     # OUTPUT> {fire: 'HOT', ice: 'melted'}
 
+When given it doesn't get a key first, it still assumes changes are to default.
+
+    console.log bee.get(time, reignite)
+
+    # OUTPUT> {fire: 'HOT', ice: 'melted'}
+
+When given keys, the `get()` method will use JSON objects it has saved at those
+keys.
+
+    bee.set 'time', time
+    bee.set 'reignite', reignite
+
+    console.log bee.get('default', 'time', 'reignite')
+
+    # OUTPUT> {fire: 'HOT', ice: 'melted'}
+
+`get()` will also mix and match accordingly.
+
+    console.log bee.get('default', time, 'reignite')
+
+    # OUTPUT> {fire: 'HOT', ice: 'melted'}
 
 
 Future Features
