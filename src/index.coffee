@@ -36,8 +36,7 @@ module.exports = class FactoryB
     return cloneDate obj if obj instanceof Date
     return cloneArray obj if obj instanceof Array
     return cloneObject obj if obj instanceof Object
-
-    throw new Error "Unable to copy obj! Its type isn't supported."
+    throw new Error "Unable to copy object! Its type isn't supported."
 
   set: (key, data)->
     if typeof key isnt 'string' and typeof key is 'object' and key isnt null
