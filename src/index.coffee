@@ -17,8 +17,27 @@ module.exports = class FactoryB
         data[key] = mutate(data[key], value)
     return data
 
-  clone = (data = {})->
-    JSON.parse JSON.stringify(data)
+  # Cloning derived from:
+  # https://stackoverflow.com/questions/728360/most-elegant-way-to-clone-a-javascript-object
+  cloneDate = (date)->
+    new Date date.getTime()
+
+  cloneArray = (array)->
+    clone value for value of array
+
+  cloneObject = (object)->
+    clone = {}
+    for key, value of object when object.hasOwnProperty(key)
+      clone[key] = clone(value)
+    return clone
+
+  clone = (obj = {})->
+    return obj if null == obj || "object" != typeof obj
+    return cloneDate obj if obj instanceof Date
+    return cloneArray obj if obj instanceof Array
+    return cloneObject obj if obj instanceof Object
+
+    throw new Error "Unable to copy obj! Its type isn't supported."
 
   set: (key, data)->
     if typeof key isnt 'string' and typeof key is 'object' and key isnt null
