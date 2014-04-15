@@ -42,12 +42,16 @@ module.exports = class FactoryB
     if key instanceof Object and key instanceof String isnt true
       data = clone key
       key = 'default'
-
-  get: (key = 'default', mutator = {})->
-    if typeof key isnt 'string'
-      mutator = key
-      key = 'default'
-    return mutate(clone(@data[key]), mutator)
     @data[key] = clone data if data isnt null
+
+  get: (mutators...)->
+    unless typeof mutators[0] is 'string'
+      mutators.unshift 'default'
+    mutators = for mutator in mutators
+      if typeof mutator is 'string'
+        clone @data[mutator]
+      else
+        clone mutator
+    mutators.reduce mutate
 
   keys: ()-> @data.keys()
