@@ -3,7 +3,7 @@
     __slice = [].slice;
 
   module.exports = FactoryB = (function() {
-    var clone, cloneArray, cloneDate, cloneObject, mutate;
+    var clone, cloneArray, cloneDate, cloneObject, mutate, runValue;
 
     function FactoryB(data) {
       var key, value;
@@ -27,10 +27,8 @@
       }
       for (key in mutator) {
         value = mutator[key];
-        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || value === null) {
+        if (value === null || typeof value !== 'object' || value instanceof Date) {
           data[key] = value;
-        } else if (value instanceof Date) {
-          data[key] = new Date(value);
         } else {
           data[key] = mutate(data[key], value);
         }
@@ -67,7 +65,7 @@
       if (obj == null) {
         obj = {};
       }
-      if (null === obj || "object" !== typeof obj) {
+      if (obj === null || typeof obj !== 'object') {
         return obj;
       }
       if (obj instanceof Date) {
@@ -80,6 +78,19 @@
         return cloneObject(obj);
       }
       throw new Error("Unable to copy object! Its type isn't supported.");
+    };
+
+    runValue = function(value) {
+      var index, subvalue, _ref;
+      if (value === null || typeof value !== 'object' || value instanceof Date) {
+        value = (_ref = typeof value === "function" ? value() : void 0) != null ? _ref : value;
+      } else if (value instanceof Object) {
+        for (index in value) {
+          subvalue = value[index];
+          value[index] = runValue(subvalue);
+        }
+      }
+      return value;
     };
 
     FactoryB.prototype.set = function(key, data) {
@@ -102,23 +113,15 @@
         mutators.unshift('default');
       }
       mutators = (function() {
-        var _i, _len, _results;
+        var _i, _len, _ref, _results;
         _results = [];
         for (_i = 0, _len = mutators.length; _i < _len; _i++) {
           mutator = mutators[_i];
-          if (typeof mutator === 'string') {
-            if (this.data[mutator] != null) {
-              _results.push(clone(this.data[mutator]));
-            } else {
-              throw new Error("Object not found for key: " + mutator);
-            }
-          } else {
-            _results.push(clone(mutator));
-          }
+          _results.push(clone((_ref = this.data[mutator]) != null ? _ref : mutator));
         }
         return _results;
       }).call(this);
-      return mutators.reduce(mutate);
+      return runValue(mutators.reduce(mutate));
     };
 
     FactoryB.prototype.keys = function() {
