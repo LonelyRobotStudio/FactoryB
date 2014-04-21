@@ -128,6 +128,17 @@ describe 'Factory B', ->
       expect(iceFire).toEqual iceFireJson
       expect(fireIce).toEqual fireIceJson
 
+    it 'should replace any functions with the values returned by those
+        functions', ->
+      json =
+        dog: -> 'bark'
+        cat: -> 'meow'
+      expectation =
+        dog: 'bark'
+        cat: 'meow'
+      bee = new FactoryB default: json
+      expect(bee.get()).toEqual expectation
+
     it 'should accept multiple keys for saved JSON objects and should return
         default after they are applied to it in order', ->
       json =
