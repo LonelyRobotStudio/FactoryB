@@ -2,6 +2,9 @@
 ![Build Status](https://travis-ci.org/LonelyRobotStudio/FactoryB.png?branch=master)
 ](https://travis-ci.org/LonelyRobotStudio/FactoryB)
 
+[
+![NPM version](https://badge.fury.io/js/factoryb.svg)
+](http://badge.fury.io/js/factoryb)
 
 About FactoryB
 ==============
@@ -21,7 +24,7 @@ Simple Usage
 ------------
 
 The simplest way you can use FactoryB is requiring it,
-  
+
     FactoryB = require 'FactoryB'
 
 instantiating an instance without arguments,
@@ -30,7 +33,7 @@ instantiating an instance without arguments,
 
 using its `set()` method with one JSON argument,
 
-    jsonArgument = 
+    jsonArgument =
       fire: 'hot'
       ice: 'cold'
 
@@ -68,7 +71,7 @@ is the same as:
 
 If we want to store more JSON we can store it under other keys,
 
-    jsonArgument2 = 
+    jsonArgument2 =
       fire: 'cold'
       ice: 'hot'
 
@@ -92,7 +95,7 @@ Setting JSON with the Constructor
 --------------------------------
 
 FactoryB's constructor will also accept a JSON object, using its keys and subobject values to populate the dictionary:
-  
+
     bee = new FactoryB
       default: jsonArgument
       oppositeWorld: jsonArgument2
