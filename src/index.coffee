@@ -32,7 +32,7 @@ module.exports = class FactoryB
     return copy
 
   clone = (obj = {})->
-    return obj if null == obj || "object" != typeof obj
+    return obj if obj is null or typeof obj isnt 'object'
     return cloneDate obj if obj instanceof Date
     return cloneArray obj if obj instanceof Array
     return cloneObject obj if obj instanceof Object
