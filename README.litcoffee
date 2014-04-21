@@ -4,6 +4,9 @@
   )
 ](https://travis-ci.org/LonelyRobotStudio/FactoryB)
 
+[
+![NPM version](https://badge.fury.io/js/factoryb.svg)
+](http://badge.fury.io/js/factoryb)
 
 About FactoryB
 ==============
@@ -97,8 +100,12 @@ and then retrieve it using those keys:
 Setting JSON with the Constructor
 --------------------------------
 
+<<<<<<< HEAD
 FactoryB's constructor will also accept a JSON object, using its keys and
 subobject values to populate the dictionary:
+=======
+FactoryB's constructor will also accept a JSON object, using its keys and subobject values to populate the dictionary:
+>>>>>>> feature-documentation
 
     bee = new FactoryB
       default: jsonArgument
