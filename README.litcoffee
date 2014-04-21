@@ -216,7 +216,7 @@ keys.
 Future Features
 ---------------
 
-- Iterators
+- Better array handling
 - Knowing its model
 - Knowing how its model should be instantiated
 - Knowing how its model should be saved
