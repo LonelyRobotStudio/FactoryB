@@ -158,14 +158,14 @@ object are run and replaced with their return values.
 
     numberWang =
       ones: -> ones += ones
-      twos: -> two + two
-    numberBee = new Factory default: numberWang
+      twos: -> twos + twos
+    numberBee = new FactoryB default: numberWang
     console.log numberBee.get numberWang
     # OUTPUT> {ones: 2, twos:4}
     console.log numberBee.get numberWang
-    # OUTPUT> {ones: 3, twos:4}
+    # OUTPUT> {ones: 4, twos:4}
 
-Variables scoped outside these functions can be changes to change the results of
+Variables scoped outside these functions can be changed to change the results of
 the functions.
 
     ones = 1
@@ -216,7 +216,7 @@ keys.
 Future Features
 ---------------
 
-- Iterators
+- Better array handling
 - Knowing its model
 - Knowing how its model should be instantiated
 - Knowing how its model should be saved
