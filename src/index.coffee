@@ -8,11 +8,8 @@ module.exports = class FactoryB
 
   mutate = (data = {}, mutator)->
     for key, value of mutator
-      if typeof value is 'string' or typeof value is 'number' \
-      or typeof value is 'boolean' or value is null
+      if value is null or typeof value isnt 'object' or value instanceof Date
         data[key] = value
-      else if value instanceof Date
-        data[key] = new Date value
       else
         data[key] = mutate(data[key], value)
     return data
@@ -32,11 +29,18 @@ module.exports = class FactoryB
     return copy
 
   clone = (obj = {})->
-    return obj if null == obj || "object" != typeof obj
+    return obj if obj is null or typeof obj isnt 'object'
     return cloneDate obj if obj instanceof Date
     return cloneArray obj if obj instanceof Array
     return cloneObject obj if obj instanceof Object
     throw new Error "Unable to copy object! Its type isn't supported."
+
+  runValue = (value)->
+    if value is null or typeof value isnt 'object' or value instanceof Date
+      value = value?() ? value
+    else if value instanceof Object
+      value[index] = runValue subvalue for index, subvalue of value
+    return value
 
   set: (key = 'default', data)->
     if key instanceof Object and key instanceof String isnt true
@@ -47,14 +51,7 @@ module.exports = class FactoryB
   get: (mutators...)->
     unless typeof mutators[0] is 'string'
       mutators.unshift 'default'
-    mutators = for mutator in mutators
-      if typeof mutator is 'string'
-        if @data[mutator]?
-          clone @data[mutator]
-        else
-          throw new Error "Object not found for key: #{mutator}"
-      else
-        clone mutator
-    mutators.reduce mutate
+    mutators = (clone @data[mutator] ? mutator for mutator in mutators)
+    runValue mutators.reduce mutate
 
   keys: ()-> @data.keys()

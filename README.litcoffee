@@ -147,6 +147,32 @@ key and changes it accordingly:
 
 
 
+Creating Dynamic Values Using Functions
+---------------------------------------
+
+When JSON objects are retrieved using the `get` method any functions in the
+object are run and replaced with their return values.
+
+    ones = 1
+    twos = 2
+
+    numberWang =
+      ones: -> ones += ones
+      twos: -> two + two
+    numberBee = new Factory default: numberWang
+    console.log numberBee.get numberWang
+    # OUTPUT> {ones: 2, twos:4}
+    console.log numberBee.get numberWang
+    # OUTPUT> {ones: 3, twos:4}
+
+Variables scoped outside these functions can be changes to change the results of
+the functions.
+
+    ones = 1
+    twos = 5
+    console.log numberBee.get numberWang
+    # OUTPUT> {ones: 2, twos:10}
+
 Chaining Saved JSON as Changes to Retrieved JSON
 ------------------------------------------------
 
