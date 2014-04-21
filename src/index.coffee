@@ -54,14 +54,7 @@ module.exports = class FactoryB
   get: (mutators...)->
     unless typeof mutators[0] is 'string'
       mutators.unshift 'default'
-    mutators = for mutator in mutators
-      if typeof mutator is 'string'
-        if @data[mutator]?
-          clone @data[mutator]
-        else
-          throw new Error "Object not found for key: #{mutator}"
-      else
-        clone mutator
+    mutators = (clone @data[mutator] ? mutator for mutator in mutators)
     runValue mutators.reduce mutate
 
   keys: ()-> @data.keys()
