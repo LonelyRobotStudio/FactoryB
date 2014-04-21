@@ -38,6 +38,13 @@ module.exports = class FactoryB
     return cloneObject obj if obj instanceof Object
     throw new Error "Unable to copy object! Its type isn't supported."
 
+  runValue = (value)->
+    if value is null or typeof value isnt 'object' or value instanceof Date
+      value = value?() ? value
+    else if value instanceof Object or value instanceof Array
+      value[index] = runValue subvalue for index, subvalue of value
+    return value
+
   set: (key = 'default', data)->
     if key instanceof Object and key instanceof String isnt true
       data = clone key
@@ -55,6 +62,6 @@ module.exports = class FactoryB
           throw new Error "Object not found for key: #{mutator}"
       else
         clone mutator
-    mutators.reduce mutate
+    runValue mutators.reduce mutate
 
   keys: ()-> @data.keys()
