@@ -3,7 +3,6 @@
   https://travis-ci.org/LonelyRobotStudio/FactoryB.png?branch=master
   )
 ](https://travis-ci.org/LonelyRobotStudio/FactoryB)
-
 [
 ![NPM version](https://badge.fury.io/js/factoryb.svg)
 ](http://badge.fury.io/js/factoryb)
