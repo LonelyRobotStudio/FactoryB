@@ -164,9 +164,9 @@ object are run and replaced with their return values.
       ones: -> ones += ones
       twos: -> twos + twos
     numberBee = new FactoryB default: numberWang
-    console.log numberBee.get numberWang
+    console.log numberBee.get()
     # OUTPUT> {ones: 2, twos:4}
-    console.log numberBee.get numberWang
+    console.log numberBee.get()
     # OUTPUT> {ones: 4, twos:4}
 
 Variables scoped outside these functions can be changed to change the results of
@@ -174,7 +174,7 @@ the functions.
 
     ones = 1
     twos = 5
-    console.log numberBee.get numberWang
+    console.log numberBee.get()
     # OUTPUT> {ones: 2, twos:10}
 
 Chaining Saved JSON as Changes to Retrieved JSON
