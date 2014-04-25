@@ -47,6 +47,7 @@ module.exports = class FactoryB
   get: (mutators...)->
     mutators.unshift 'default' unless typeof mutators[0] is 'string'
     mutators = (_clone @data[mutator] ? mutator for mutator in mutators)
-    _runValue mutators.reduce _mutate
+    mutators.unshift {}
+    mutators.reduce _mutate
 
   keys: -> @data.keys()
