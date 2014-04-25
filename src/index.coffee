@@ -38,13 +38,6 @@ module.exports = class FactoryB
     return _cloneObject obj if obj instanceof Object
     throw new Error "Unable to copy object! Its type isn't supported."
 
-  _runValue = (value)->
-    if value is null or typeof value isnt 'object' or value instanceof Date
-      value = value?() ? value
-    else if value instanceof Object
-      value[index] = _runValue subvalue for index, subvalue of value
-    return value
-
   set: (key = 'default', data)->
     if key instanceof Object and key instanceof String isnt true
       data = key
