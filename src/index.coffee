@@ -47,7 +47,7 @@ module.exports = class FactoryB
 
   set: (key = 'default', data)->
     if key instanceof Object and key instanceof String isnt true
-      data = _clone key
+      data = key
       key = 'default'
     @data[key] = _clone data if data isnt null
 
