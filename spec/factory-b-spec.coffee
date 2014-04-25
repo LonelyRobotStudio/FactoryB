@@ -143,6 +143,18 @@ describe 'Factory B', ->
       bee = new FactoryB default: json
       expect(bee.get()).toEqual expectation
 
+    it 'should pass functions the values of the previous JSON', ->
+      original =
+        dog: 'bark'
+        cat: 'bark'
+      change =
+        cat: (prev)-> prev + ' bark'
+      expected =
+        dog: 'bark'
+        cat: 'bark bark'
+      bee = new FactoryB default: original
+      expect(bee.get change).toEqual expected
+
     it 'should accept multiple keys for saved JSON objects and should return
         default after they are applied to it in order', ->
       json =
