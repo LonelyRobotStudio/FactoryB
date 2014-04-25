@@ -1,9 +1,9 @@
 module.exports = class FactoryB
 
-  @factories = {}
+  @_factories = {}
 
-  @set = (name, factory)-> @factories[name] = factory
-  @get = (name)-> @factories[name]
+  @set = (name, factory)-> @_factories[name] = factory
+  @get = (name)-> @_factories[name]
 
   constructor: (name, data)->
     data ?= name
@@ -21,11 +21,9 @@ module.exports = class FactoryB
 
   # Cloning derived from:
   # https://stackoverflow.com/questions/728360/most-elegant-way-to-clone-a-javascript-object
-  _cloneDate = (date)->
-    new Date date.getTime()
+  _cloneDate = (date)-> new Date date.getTime()
 
-  _cloneArray = (array)->
-    _clone value for value of array
+  _cloneArray = (array)-> _clone value for value of array
 
   _cloneObject = (object)->
     copy = {}
@@ -54,9 +52,8 @@ module.exports = class FactoryB
     @data[key] = _clone data if data isnt null
 
   get: (mutators...)->
-    unless typeof mutators[0] is 'string'
-      mutators.unshift 'default'
+    mutators.unshift 'default' unless typeof mutators[0] is 'string'
     mutators = (_clone @data[mutator] ? mutator for mutator in mutators)
     _runValue mutators.reduce _mutate
 
-  keys: ()-> @data.keys()
+  keys: -> @data.keys()
