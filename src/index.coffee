@@ -4,6 +4,7 @@ module.exports = class FactoryB
 
   @set = (name, factory)-> @_factories[name] = factory
   @get = (name)-> @_factories[name]
+  @keys = -> @_factories.keys()
 
   constructor: (name, data)->
     data ?= name
