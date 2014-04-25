@@ -217,6 +217,34 @@ keys.
     # OUTPUT> {fire: 'HOT', ice: 'melted'}
 
 
+
+Managing Multiple Factories With The Constructor
+------------------------------------------------
+
+The FactoryB constructor will track any factories that are instantiated with a
+name string, which can then be retrieved using `get()` on the contructor.
+
+    honeyBee = new FactoryB 'honeyBee', collects: 'honey'
+    fireBee = new FactoryB 'fireBee', collects: 'fire'
+
+    console.log FactoryB.get('honeyBee').get()
+    console.log FactoryB.get('fireBee').get()
+
+    # OUTPUT> {collects: 'honey'}
+    # OUTPUT> {collects: 'fire'}
+
+The FactoryB constructor also has a `set()` method, if you decide you want the
+constructor to track it after instantiation.
+
+    iceBee = new FactoryBee collects: 'ice'
+    FactoryBee.set 'iceBee', iceBee
+
+    console.log FactoryB.get('iceBee').get()
+
+    # OUTPUT> {collects: 'ice'}
+
+
+
 Future Features
 ---------------
 

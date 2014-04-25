@@ -3,91 +3,97 @@
     __slice = [].slice;
 
   module.exports = FactoryB = (function() {
-    var clone, cloneArray, cloneDate, cloneObject, mutate, runValue;
+    var _clone, _cloneArray, _cloneDate, _cloneObject, _mutate, _runValue;
 
-    function FactoryB(data) {
+    FactoryB.factories = {};
+
+    FactoryB.set = function(name, factory) {
+      return this.factories[name] = factory;
+    };
+
+    FactoryB.get = function(name) {
+      return this.factories[name];
+    };
+
+    function FactoryB(name, data) {
       var key, value;
       if (data == null) {
-        data = {};
+        data = name;
       }
-      this.data = {};
+      if (typeof name === 'string') {
+        FactoryB.set(name, this);
+      }
+      this.data = {
+        "default": {}
+      };
       for (key in data) {
         value = data[key];
         this.set(key, value);
       }
-      if (this.data["default"] == null) {
-        this.data["default"] = {};
-      }
     }
 
-    mutate = function(data, mutator) {
+    _mutate = function(data, mutator) {
       var key, value;
-      if (data == null) {
-        data = {};
-      }
       for (key in mutator) {
         value = mutator[key];
         if (value === null || typeof value !== 'object' || value instanceof Date) {
           data[key] = value;
         } else {
-          data[key] = mutate(data[key], value);
+          data[key] = _mutate(data[key], value);
         }
       }
       return data;
     };
 
-    cloneDate = function(date) {
+    _cloneDate = function(date) {
       return new Date(date.getTime());
     };
 
-    cloneArray = function(array) {
+    _cloneArray = function(array) {
       var value, _results;
       _results = [];
       for (value in array) {
-        _results.push(clone(value));
+        _results.push(_clone(value));
       }
       return _results;
     };
 
-    cloneObject = function(object) {
+    _cloneObject = function(object) {
       var copy, key, value;
       copy = {};
       for (key in object) {
         value = object[key];
         if (object.hasOwnProperty(key)) {
-          copy[key] = clone(value);
+          copy[key] = _clone(value);
         }
       }
       return copy;
     };
 
-    clone = function(obj) {
-      if (obj == null) {
-        obj = {};
-      }
+    _clone = function(obj) {
       if (obj === null || typeof obj !== 'object') {
         return obj;
       }
       if (obj instanceof Date) {
-        return cloneDate(obj);
+        return _cloneDate(obj);
       }
       if (obj instanceof Array) {
-        return cloneArray(obj);
+        return _cloneArray(obj);
       }
       if (obj instanceof Object) {
-        return cloneObject(obj);
+        return _cloneObject(obj);
       }
       throw new Error("Unable to copy object! Its type isn't supported.");
     };
 
-    runValue = function(value) {
+    _runValue = function(value) {
       var index, subvalue, _ref;
       if (value === null || typeof value !== 'object' || value instanceof Date) {
         value = (_ref = typeof value === "function" ? value() : void 0) != null ? _ref : value;
       } else if (value instanceof Object) {
         for (index in value) {
           subvalue = value[index];
-          value[index] = runValue(subvalue);
+          value[index] = _runValue(subvalue);
         }
       }
       return value;
@@ -98,11 +104,11 @@
         key = 'default';
       }
       if (key instanceof Object && key instanceof String !== true) {
-        data = clone(key);
+        data = _clone(key);
         key = 'default';
       }
       if (data !== null) {
-        return this.data[key] = clone(data);
+        return this.data[key] = _clone(data);
       }
     };
 
@@ -117,11 +123,11 @@
         _results = [];
         for (_i = 0, _len = mutators.length; _i < _len; _i++) {
           mutator = mutators[_i];
-          _results.push(clone((_ref = this.data[mutator]) != null ? _ref : mutator));
+          _results.push(_clone((_ref = this.data[mutator]) != null ? _ref : mutator));
         }
         return _results;
       }).call(this);
-      return runValue(mutators.reduce(mutate));
+      return _runValue(mutators.reduce(_mutate));
     };
 
     FactoryB.prototype.keys = function() {
