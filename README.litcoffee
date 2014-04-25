@@ -224,8 +224,8 @@ Managing Multiple Factories With The Constructor
 The FactoryB constructor will track any factories that are instantiated with a
 name string, which can then be retrieved using `get()` on the contructor.
 
-    honeyBee = new FactoryB 'honeyBee', collects: 'honey'
-    fireBee = new FactoryB 'fireBee', collects: 'fire'
+    honeyBee = new FactoryB 'honeyBee', default: collects: 'honey'
+    fireBee = new FactoryB 'fireBee', default: collects: 'fire'
 
     console.log FactoryB.get('honeyBee').get()
     console.log FactoryB.get('fireBee').get()
@@ -236,8 +236,8 @@ name string, which can then be retrieved using `get()` on the contructor.
 The FactoryB constructor also has a `set()` method, if you decide you want the
 constructor to track it after instantiation.
 
-    iceBee = new FactoryBee collects: 'ice'
-    FactoryBee.set 'iceBee', iceBee
+    iceBee = new FactoryB default: collects: 'ice'
+    FactoryB.set 'iceBee', iceBee
 
     console.log FactoryB.get('iceBee').get()
 
