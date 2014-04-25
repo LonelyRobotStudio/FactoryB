@@ -24,6 +24,10 @@ describe 'Factory B', ->
           dog: 'square'
       expect(bee).not.toBeNull()
 
+    it 'should know its instantiations', ->
+      bee1 = new FactoryB 'bee1', default: "default"
+      expect(FactoryB.get 'bee1').toEqual bee1
+
   describe 'has a get method that', ->
 
     it 'should accept nothing and return a JSON object held under the key
