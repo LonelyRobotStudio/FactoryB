@@ -15,9 +15,8 @@ module.exports = class FactoryB
   _mutate = (data, mutator)->
     for key, value of mutator
       if value is null or typeof value isnt 'object' or value instanceof Date
-        data[key] = value
-      else
-        data[key] = _mutate(data[key], value)
+        data[key] = value?(data?[key]) ? value
+      else data[key] = _mutate(data[key], value)
     return data
 
   # Cloning derived from:
