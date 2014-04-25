@@ -1,12 +1,17 @@
 module.exports = class FactoryB
 
-  constructor: (data = {})->
-    @data = {}
-    for key, value of data
-      @set(key, value)
-    @data.default = {} unless @data.default?
+  @factories = {}
 
-  _mutate = (data = {}, mutator)->
+  @set = (name, factory)-> @factories[name] = factory
+  @get = (name)-> @factories[name]
+
+  constructor: (name, data)->
+    data ?= name
+    FactoryB.set name, this if typeof name is 'string'
+    @data = default: {}
+    @set key, value for key, value of data
+
+  _mutate = (data, mutator)->
     for key, value of mutator
       if value is null or typeof value isnt 'object' or value instanceof Date
         data[key] = value
@@ -28,7 +33,7 @@ module.exports = class FactoryB
       copy[key] = _clone(value)
     return copy
 
-  _clone = (obj = {})->
+  _clone = (obj)->
     return obj if obj is null or typeof obj isnt 'object'
     return _cloneDate obj if obj instanceof Date
     return _cloneArray obj if obj instanceof Array
