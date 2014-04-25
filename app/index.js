@@ -37,11 +37,15 @@
     }
 
     _mutate = function(data, mutator) {
-      var key, value, _ref;
+      var key, value;
       for (key in mutator) {
         value = mutator[key];
         if (value === null || typeof value !== 'object' || value instanceof Date) {
-          data[key] = (_ref = typeof value === "function" ? value(data != null ? data[key] : void 0) : void 0) != null ? _ref : value;
+          if (value instanceof Function) {
+            data[key] = value(data != null ? data[key] : void 0);
+          } else {
+            data[key] = value;
+          }
         } else {
           data[key] = _mutate(data[key], value);
         }
