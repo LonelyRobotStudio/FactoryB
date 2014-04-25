@@ -3,16 +3,20 @@
     __slice = [].slice;
 
   module.exports = FactoryB = (function() {
-    var _clone, _cloneArray, _cloneDate, _cloneObject, _mutate, _runValue;
+    var _clone, _cloneArray, _cloneDate, _cloneObject, _mutate;
 
-    FactoryB.factories = {};
+    FactoryB._factories = {};
 
     FactoryB.set = function(name, factory) {
-      return this.factories[name] = factory;
+      return this._factories[name] = factory;
     };
 
     FactoryB.get = function(name) {
-      return this.factories[name];
+      return this._factories[name];
+    };
+
+    FactoryB.keys = function() {
+      return this._factories.keys();
     };
 
     function FactoryB(name, data) {
@@ -33,11 +37,11 @@
     }
 
     _mutate = function(data, mutator) {
-      var key, value;
+      var key, value, _ref;
       for (key in mutator) {
         value = mutator[key];
         if (value === null || typeof value !== 'object' || value instanceof Date) {
-          data[key] = value;
+          data[key] = (_ref = typeof value === "function" ? value(data != null ? data[key] : void 0) : void 0) != null ? _ref : value;
         } else {
           data[key] = _mutate(data[key], value);
         }
@@ -86,25 +90,12 @@
       throw new Error("Unable to copy object! Its type isn't supported.");
     };
 
-    _runValue = function(value) {
-      var index, subvalue, _ref;
-      if (value === null || typeof value !== 'object' || value instanceof Date) {
-        value = (_ref = typeof value === "function" ? value() : void 0) != null ? _ref : value;
-      } else if (value instanceof Object) {
-        for (index in value) {
-          subvalue = value[index];
-          value[index] = _runValue(subvalue);
-        }
-      }
-      return value;
-    };
-
     FactoryB.prototype.set = function(key, data) {
       if (key == null) {
         key = 'default';
       }
       if (key instanceof Object && key instanceof String !== true) {
-        data = _clone(key);
+        data = key;
         key = 'default';
       }
       if (data !== null) {
@@ -127,7 +118,8 @@
         }
         return _results;
       }).call(this);
-      return _runValue(mutators.reduce(_mutate));
+      mutators.unshift({});
+      return mutators.reduce(_mutate);
     };
 
     FactoryB.prototype.keys = function() {
