@@ -40,7 +40,7 @@
       var key, value;
       for (key in mutator) {
         value = mutator[key];
-        if (value === null || typeof value !== 'object' || value instanceof Date) {
+        if (value === null || typeof value !== 'object' || value instanceof Date || value instanceof Array) {
           if (value instanceof Function) {
             data[key] = value(data != null ? data[key] : void 0);
           } else {
