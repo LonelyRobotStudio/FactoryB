@@ -14,10 +14,10 @@ module.exports = class FactoryB
 
   _mutate = (data, mutator)->
     for key, value of mutator
-      if value is null or typeof value isnt 'object' or value instanceof Date
+      if value is null or typeof value isnt 'object' or value instanceof Date or value instanceof Array
         if value instanceof Function
           data[key] = value(data?[key])
-         else data[key] = value
+        else data[key] = value
       else data[key] = _mutate(data[key], value)
     return data
 
