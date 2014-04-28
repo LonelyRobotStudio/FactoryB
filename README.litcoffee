@@ -177,6 +177,25 @@ the functions.
     console.log numberBee.get()
     # OUTPUT> {ones: 2, twos:10}
 
+Functions are also passed the previous value in the chain of mutators allowing
+programmatic changes.
+
+    dogs =
+      description: "dog list"
+      dogs: [
+        "Snoopy"
+      ]
+
+    addScooby =
+      dogs: (prev)->
+        prev.push "Scooby"
+        return prev
+
+    pound = new FactoryB default: dogs
+    console.log pound.get 'default', addScooby
+
+
+
 Chaining Saved JSON as Changes to Retrieved JSON
 ------------------------------------------------
 
@@ -236,7 +255,7 @@ name string, which can then be retrieved using `get()` on the contructor.
 The FactoryB constructor also has a `set()` method, if you decide you want the
 constructor to track it after instantiation.
 
-    iceBee = new FactoryBee collects: 'ice'
+    iceBee = new FactoryB collects: 'ice'
     FactoryBee.set 'iceBee', iceBee
 
     console.log FactoryB.get('iceBee').get()
