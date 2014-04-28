@@ -26,7 +26,7 @@ module.exports = class FactoryB
   # https://stackoverflow.com/questions/728360/most-elegant-way-to-clone-a-javascript-object
   _cloneDate = (date)-> new Date date.getTime()
 
-  _cloneArray = (array)-> _clone value for value of array
+  _cloneArray = (array)-> _clone value for value in array
 
   _cloneObject = (object)->
     copy = {}
