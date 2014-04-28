@@ -115,11 +115,11 @@
         mutators.unshift('default');
       }
       mutators = (function() {
-        var _i, _len, _ref, _ref1, _results;
+        var _i, _len, _ref, _results;
         _results = [];
         for (_i = 0, _len = mutators.length; _i < _len; _i++) {
           mutator = mutators[_i];
-          _results.push(_clone((_ref = (_ref1 = this.data) != null ? _ref1[mutator] : void 0) != null ? _ref : mutator));
+          _results.push(_clone((_ref = this.data[mutator]) != null ? _ref : mutator));
         }
         return _results;
       }).call(this);
