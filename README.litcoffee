@@ -194,6 +194,8 @@ programmatic changes.
     pound = new FactoryB default: dogs
     console.log pound.get 'default', addScooby
 
+    # OUTPUT> {description: "dog list", dogs: ["Snoopy", "Scooby"]}
+
 
 
 Chaining Saved JSON as Changes to Retrieved JSON
