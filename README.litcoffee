@@ -264,6 +264,11 @@ constructor to track it after instantiation.
 
     # OUTPUT> {collects: 'ice'}
 
+With require's caching, stored factories can be retrieved anywhere you can use
+require to get the FactoryB constructor.
+
+    console.log require('FactoryB').get('honeyBee').get()
+
 
 
 Future Features
