@@ -3,6 +3,11 @@
   https://travis-ci.org/LonelyRobotStudio/FactoryB.png?branch=master
   )
 ](https://travis-ci.org/LonelyRobotStudio/FactoryB)
+[
+![Stories in Ready](
+  https://badge.waffle.io/lonelyrobotstudio/factoryb.png?label=ready&title=Ready
+  )
+](http://waffle.io/lonelyrobotstudio/factoryb)
 
 [
 ![NPM](https://nodei.co/npm/factoryb.png?downloads=true)
