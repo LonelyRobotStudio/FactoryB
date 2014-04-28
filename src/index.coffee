@@ -14,7 +14,8 @@ module.exports = class FactoryB
 
   _mutate = (data, mutator)->
     for key, value of mutator
-      if value is null or typeof value isnt 'object' or value instanceof Date or value instanceof Array
+      if value is null or typeof value isnt 'object' or value instanceof Date \
+      or value instanceof Array
         if value instanceof Function
           data[key] = value(data?[key])
         else data[key] = value
@@ -25,7 +26,7 @@ module.exports = class FactoryB
   # https://stackoverflow.com/questions/728360/most-elegant-way-to-clone-a-javascript-object
   _cloneDate = (date)-> new Date date.getTime()
 
-  _cloneArray = (array)-> _clone value for value of array
+  _cloneArray = (array)-> _clone value for value in array
 
   _cloneObject = (object)->
     copy = {}

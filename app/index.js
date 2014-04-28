@@ -40,7 +40,7 @@
       var key, value;
       for (key in mutator) {
         value = mutator[key];
-        if (value === null || typeof value !== 'object' || value instanceof Date) {
+        if (value === null || typeof value !== 'object' || value instanceof Date || value instanceof Array) {
           if (value instanceof Function) {
             data[key] = value(data != null ? data[key] : void 0);
           } else {
@@ -58,9 +58,10 @@
     };
 
     _cloneArray = function(array) {
-      var value, _results;
+      var value, _i, _len, _results;
       _results = [];
-      for (value in array) {
+      for (_i = 0, _len = array.length; _i < _len; _i++) {
+        value = array[_i];
         _results.push(_clone(value));
       }
       return _results;
@@ -114,11 +115,11 @@
         mutators.unshift('default');
       }
       mutators = (function() {
-        var _i, _len, _ref, _results;
+        var _i, _len, _ref, _ref1, _results;
         _results = [];
         for (_i = 0, _len = mutators.length; _i < _len; _i++) {
           mutator = mutators[_i];
-          _results.push(_clone((_ref = this.data[mutator]) != null ? _ref : mutator));
+          _results.push(_clone((_ref = (_ref1 = this.data) != null ? _ref1[mutator] : void 0) != null ? _ref : mutator));
         }
         return _results;
       }).call(this);
