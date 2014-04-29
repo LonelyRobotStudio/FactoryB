@@ -9,7 +9,11 @@
   "keywords": [
     "fixtures",
     "factories",
-    "testing"
+    "testing",
+    "TDD",
+    "BDD",
+    "JSON",
+    "Objects"
   ],
   "homepage": "http://github.com/LonelyRobotStudio/FactoryB",
   "author": {
