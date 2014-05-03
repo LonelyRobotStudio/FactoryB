@@ -20,7 +20,6 @@ module.exports = (grunt)->
         files: ['src/*/*.coffee', 'src/*.coffee', 'src/*/*/*.coffee', 'spec/*.coffee', 'spec/*/*.coffee'],
         tasks: ['coffeelint:test', 'coffeelint:app', 'spec']
 
-  
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-jasmine-bundle'
