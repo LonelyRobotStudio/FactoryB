@@ -55,4 +55,11 @@ module.exports = class FactoryB
 
   setModel: (@model)->
   setBuild: (@buildMethod)->
+  build: (mutators...)->
+    if @model?
+      if @buildMethod?
+        @buildMethod(@get(mutators), @model)
+      else
+        new @model @get mutators
+
   keys: -> @data.keys()
