@@ -205,6 +205,38 @@ describe 'Factory B', ->
   it 'should have a method to get the keys for the JSON objects it stores', ->
     bee = new FactoryB
 
+  describe 'has methods for knowing its model and creating documents that', ->
+    class TestClass
+      constructor: (parameters)->
+        @[key] = value for key, value in parameters
+      @create: (parameters)-> (new TestClass parameters).save()
+      save: ()->
+
+    testJSON =
+        frog: 'jump'
+        cheese: 'wheel'
+
+    expectedDocument = new TestClass testJSON
+
+    it 'should include a method that accepts a model', ->
+      bee = new FactoryB default: testJSON
+      expect(->bee.setModel TestClass).not.toThrow()
+
+    it 'should include a method that returns a document built from the given
+    model and stored object', ->
+      bee = new FactoryB default: testJSON
+      bee.setModel TestClass
+      expect(bee.build()).toEqual expectedDocument
+
+    it 'should include a method that sets how Factory builds the document', ->
+      bee = new FactoryB default: testJSON
+      bee.setModel TestClass
+      buildMethod = (data, model)-> new model data
+      buildSpy = jasmine.createSpy('buildMethod').andCallFake buildMethod
+      bee.setBuild buildSpy
+      expect(bee.build()).toEqual expectedDocument
+      expect(buildSpy).toHaveBeenCalled()
+
   describe 'had bugs such that', ->
 
     it 'Mutator does not accept a Date (#8)', ->
