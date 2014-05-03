@@ -218,6 +218,10 @@ describe 'Factory B', ->
 
     expectedDocument = new TestClass testJSON
 
+    it 'should include a method that accepts a model', ->
+      bee = new FactoryB default: testJSON
+      expect(->bee.setModel TestClass).not.toThrow()
+
   describe 'had bugs such that', ->
 
     it 'Mutator does not accept a Date (#8)', ->
