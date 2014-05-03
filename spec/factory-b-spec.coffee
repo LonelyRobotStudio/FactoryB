@@ -31,7 +31,7 @@ describe 'Factory B', ->
   describe 'has a get method that', ->
 
     it 'should accept nothing and return a JSON object held under the key
-        \'default\'', ->
+    \'default\'', ->
       json =
         frog: 'jump'
         bacon: 'delicious'
@@ -39,7 +39,7 @@ describe 'Factory B', ->
       expect(bee.get()).toEqual json
 
     it 'should accept a string as a key and return a JSON object held under that
-        key', ->
+    key', ->
       json =
         frog: 'jump'
         bacon: 'delicious'
@@ -47,7 +47,7 @@ describe 'Factory B', ->
       expect(bee.get('json')).toEqual json
 
     it 'should accept a string as a key and a JSON object as mutator and reuturn
-        an altered JSON object', ->
+    an altered JSON object', ->
       originalJson =
         ice: 'cold'
         fire: 'fire'
@@ -67,7 +67,7 @@ describe 'Factory B', ->
       expect(result).toEqual expectedJson
 
     it 'should accept a JSON object as a mutator and return the JSON object
-        under the default key altered', ->
+    under the default key altered', ->
       originalJson =
         ice: 'cold'
         fire: 'fire'
@@ -107,7 +107,7 @@ describe 'Factory B', ->
       expect(result2).toEqual originalJson
 
     it 'should accept multiple JSON objects and should return default after they
-        are applied to it in order', ->
+    are applied to it in order', ->
       json =
         pine: 'tree'
         ice: 'cold'
@@ -133,7 +133,7 @@ describe 'Factory B', ->
       expect(fireIce).toEqual fireIceJson
 
     it 'should replace any functions with the values returned by those
-        functions', ->
+    functions', ->
       json =
         dog: -> 'bark'
         cat: -> 'meow'
@@ -156,7 +156,7 @@ describe 'Factory B', ->
       expect(bee.get change).toEqual expected
 
     it 'should accept multiple keys for saved JSON objects and should return
-        default after they are applied to it in order', ->
+    default after they are applied to it in order', ->
       json =
         ice: 'cold'
         fire: 'fire'
@@ -187,7 +187,7 @@ describe 'Factory B', ->
   describe 'has a set method that', ->
 
     it 'should accept a key as a string and a JSON object that will be
-        retrievable with that key', ->
+    retrievable with that key', ->
       json = fur: 'existential'
       bee = new FactoryB
       bee.set('cat', json)
@@ -195,7 +195,7 @@ describe 'Factory B', ->
       expect(result).toEqual(json)
 
     it 'should accept a JSON object that will be retrievable with the key
-        default', ->
+    default', ->
       json = fur: 'existential'
       bee = new FactoryB
       bee.set(json)
