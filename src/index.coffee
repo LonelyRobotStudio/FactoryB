@@ -54,4 +54,5 @@ module.exports = class FactoryB
     mutators.reduce _mutate
 
   setModel: (@model)->
+  setBuild: (@buildMethod)->
   keys: -> @data.keys()
