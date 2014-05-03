@@ -53,4 +53,5 @@ module.exports = class FactoryB
     mutators.unshift {}
     mutators.reduce _mutate
 
+  setModel: (@model)->
   keys: -> @data.keys()
