@@ -222,6 +222,11 @@ describe 'Factory B', ->
       bee = new FactoryB default: testJSON
       expect(->bee.setModel TestClass).not.toThrow()
 
+    it 'should include a method that returns a document built from the given
+    model and stored object', ->
+      bee = new FactoryB default: testJSON
+      bee.setModel TestClass
+      expect(bee.build()).toEqual expectedDocument
   describe 'had bugs such that', ->
 
     it 'Mutator does not accept a Date (#8)', ->
