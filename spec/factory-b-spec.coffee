@@ -205,6 +205,19 @@ describe 'Factory B', ->
   it 'should have a method to get the keys for the JSON objects it stores', ->
     bee = new FactoryB
 
+  describe 'has methods for knowing its model and creating documents that', ->
+    class TestClass
+      constructor: (parameters)->
+        @[key] = value for key, value in parameters
+      @create: (parameters)-> (new TestClass parameters).save()
+      save: ()->
+
+    testJSON =
+        frog: 'jump'
+        cheese: 'wheel'
+
+    expectedDocument = new TestClass testJSON
+
   describe 'had bugs such that', ->
 
     it 'Mutator does not accept a Date (#8)', ->
