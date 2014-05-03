@@ -12,7 +12,7 @@ module.exports = (grunt)->
           dest: 'test/factory-b-spec.js' ]
     coffeelint:
       app: ['src/index.coffee']
-      test: ['spec/spec.coffee']
+      test: ['spec/factory-b-spec.coffee']
       grunt: ['gruntfile.coffee']
     clean: ["app"]
     watch:
