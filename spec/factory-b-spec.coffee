@@ -227,6 +227,16 @@ describe 'Factory B', ->
       bee = new FactoryB default: testJSON
       bee.setModel TestClass
       expect(bee.build()).toEqual expectedDocument
+
+    it 'should include a method that sets how Factory builds the document', ->
+      bee = new FactoryB default: testJSON
+      bee.setModel TestClass
+      buildMethod = (data, model)-> new model data
+      buildSpy = jasmine.createSpy('buildMethod').andCallFake buildMethod
+      bee.setBuild buildSpy
+      expect(bee.build()).toEqual expectedDocument
+      expect(buildSpy).toHaveBeenCalled()
+
   describe 'had bugs such that', ->
 
     it 'Mutator does not accept a Date (#8)', ->
