@@ -244,6 +244,45 @@ keys.
 
 
 
+Model and Document Handling With FactoryB
+-----------------------------------------
+
+When given the model associated with its fixtures, FactoryB can be used to build
+documents with its JSON using the `build` method.
+
+    class Things
+      constructor: (parameters)->
+        @[key] = value for key, value of parameters
+        @['I am'] = 'different'
+
+    bee.setModel Things
+
+    console.log bee.build()
+
+    # OUTPUT> {fire: 'hot', ice: 'cold', 'I am': 'different'}
+
+FactoryB's build method can also be overridden using a function that the results
+of a FactoryB `get` and the stored model as parameters and returns and
+instantiated document.
+
+    bee.setBuild (data, model)->
+      console.log "We be building documents up in here!"
+      new model data
+    console.log bee.build()
+
+    # OUTPUT> We be building documents up in here!
+    # OUTPUT> {fire: 'hot', ice: 'cold', 'I am': 'different'}
+
+FactoryB's `build` method otherwise preforms just like the the get method.
+
+    console.log bee.build(
+      'default'
+      'reignite'
+      {ice: (prev)-> 'ice ' + prev}
+    )
+
+
+
 Managing Multiple Factories With The Constructor
 ------------------------------------------------
 
@@ -284,8 +323,4 @@ Recent Fixes
 Future Features
 ---------------
 
-- Better array handling
-- Knowing its model
-- Knowing how its model should be instantiated
-- Knowing how its model should be saved
 - Object relationship handling

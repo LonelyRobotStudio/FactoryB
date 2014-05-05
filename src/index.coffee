@@ -58,7 +58,7 @@ module.exports = class FactoryB
   build: (mutators...)->
     if @model?
       if @buildMethod?
-        @buildMethod(@get(mutators), @model)
+        @buildMethod @get(mutators...), @model
       else
         new @model @get mutators
 
