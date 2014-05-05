@@ -127,8 +127,28 @@
       return mutators.reduce(_mutate);
     };
 
+    FactoryB.prototype.setModel = function(model) {
+      this.model = model;
+    };
+
+    FactoryB.prototype.setBuild = function(buildMethod) {
+      this.buildMethod = buildMethod;
+    };
+
+    FactoryB.prototype.build = function() {
+      var mutators;
+      mutators = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      if (this.model != null) {
+        if (this.buildMethod != null) {
+          return this.buildMethod(this.get.apply(this, mutators), this.model);
+        } else {
+          return new this.model(this.get(mutators));
+        }
+      }
+    };
+
     FactoryB.prototype.keys = function() {
-      return this.data.keys();
+      return Object.keys(this.data);
     };
 
     return FactoryB;
