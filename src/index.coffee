@@ -62,4 +62,4 @@ module.exports = class FactoryB
       else
         new @model @get mutators
 
-  keys: -> @data.keys()
+  keys: -> Object.keys(@data)
