@@ -279,7 +279,7 @@ require to get the FactoryB constructor.
 Recent Fixes
 ------------
 - 04/28/2014: Addressed problem in mutating arrays
-- 04/03/2013: Addressed problem in mutating Dates
+- 04/03/2014: Addressed problem in mutating Dates
 
 Future Features
 ---------------
