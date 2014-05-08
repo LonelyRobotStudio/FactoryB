@@ -38,6 +38,9 @@
 
     _mutate = function(data, mutator) {
       var key, value;
+      if (data == null) {
+        data = {};
+      }
       for (key in mutator) {
         value = mutator[key];
         if (value === null || typeof value !== 'object' || value instanceof Date || value instanceof Array) {
