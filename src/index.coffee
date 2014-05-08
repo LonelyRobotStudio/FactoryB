@@ -12,7 +12,7 @@ module.exports = class FactoryB
     @data = default: {}
     @set key, value for key, value of data
 
-  _mutate = (data, mutator)->
+  _mutate = (data = {}, mutator)->
     for key, value of mutator
       if value is null or typeof value isnt 'object' or value instanceof Date \
       or value instanceof Array
