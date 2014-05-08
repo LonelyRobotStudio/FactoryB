@@ -246,3 +246,14 @@ describe 'Factory B', ->
       bee.set(json)
       result = bee.get(mutator)
       expect(result).toEqual mutator
+
+    it 'Nested JSON is not being processed as expected #31', ->
+      options =
+        hostname: '127.0.0.1'
+        port: 3000
+        path: '/users'
+        method: 'GET'
+        headers:
+          accept: 'text/json+hal'
+      bee = new FactoryB default: options
+      expect(bee.get()).toEqual options
