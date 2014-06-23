@@ -197,10 +197,27 @@ programmatic changes.
         return prev
 
     pound = new FactoryB default: dogs
-    console.log pound.get 'default', addScooby
+    console.log pound.get()
+    console.log pound.get addScooby
 
     # OUTPUT> {description: "dog list", dogs: ["Snoopy", "Scooby"]}
 
+If one wants to replace a sub-object with a whole different object by wrapping
+the new object in a function:
+
+    dogsFoods =
+      description: 'dog foods'
+      dogs: dog: 'dog food'
+
+    specific =
+      dogs:->
+        Scooby: 'Scooby Snacks'
+        Snoopy: 'Peanuts'
+
+    store = new FactoryB default: dogsFoods
+
+    console.log store.get()
+    console.log store.get 'default', specific
 
 
 Chaining Saved JSON as Changes to Retrieved JSON
