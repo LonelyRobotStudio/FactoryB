@@ -9,7 +9,7 @@ module.exports = (grunt)->
       test:
         files: [
           src: 'spec/factory-b-spec.coffee'
-          dest: 'test/factory-b-spec.js' ]
+          dest: 'spec/factory-b-spec.js' ]
     coffeelint:
       app: ['src/index.coffee']
       test: ['spec/factory-b-spec.coffee']
@@ -30,7 +30,7 @@ module.exports = (grunt)->
   grunt.registerTask 'lint', ['coffeelint']
   grunt.registerTask 'test', ['spec']
   grunt.registerTask 'build', ['coffee:app']
-  grunt.registerTask 'default', ['coffeelint:app', 'test', 'clean', 'build']
+  grunt.registerTask 'default', ['coffeelint:app', 'coffee:test', 'test', 'clean', 'build']
   grunt.registerTask 'patch', ['default', 'release:patch']
   grunt.registerTask 'minor', ['default', 'release:minor']
   grunt.registerTask 'major', ['default', 'release:major']

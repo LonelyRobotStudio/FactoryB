@@ -27,17 +27,17 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "FactoryB": "git+https://github.com/LonelyRobotStudio/FactoryB.git",
     "coffee-script": "~1.7.1",
-    "grunt": "~0.4.2",
-    "jasmine-node": "~1.13.1",
-    "grunt-contrib-coffee": "~0.9.0",
-    "grunt-jasmine-bundle": "~0.1.4",
-    "grunt-contrib-clean": "~0.5.0",
     "coffeelint": "~1.0.7",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-release": "~0.6.0",
+    "grunt": "~0.4.2",
     "grunt-coffeelint": "0.0.8",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-coffee": "~0.9.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-jasmine": "~0.1.4",
     "grunt-notify": "~0.2.17",
-    "FactoryB": "git+https://github.com/LonelyRobotStudio/FactoryB.git"
+    "grunt-release": "~0.6.0",
+    "jasmine-node": "^1.14.5"
   }
 }
