@@ -30,7 +30,7 @@ module.exports = (grunt)->
   grunt.registerTask 'lint', ['coffeelint']
   grunt.registerTask 'test', ['spec']
   grunt.registerTask 'build', ['coffee:app']
-  grunt.registerTask 'default', ['coffeelint:app', 'coffee:test', 'test', 'clean', 'build']
+  grunt.registerTask 'default', ['coffeelint:app', 'clean', 'coffee', 'test']
   grunt.registerTask 'patch', ['default', 'release:patch']
   grunt.registerTask 'minor', ['default', 'release:minor']
   grunt.registerTask 'major', ['default', 'release:major']
