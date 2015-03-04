@@ -1,4 +1,4 @@
-module.exports = class FactoryB
+class FactoryB
 
   @_factories = {}
 
@@ -63,3 +63,5 @@ module.exports = class FactoryB
         new @model @get mutators
 
   keys: -> Object.keys(@data)
+try
+  module.exports = FactoryB
