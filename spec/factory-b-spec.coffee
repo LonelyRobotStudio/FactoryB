@@ -231,11 +231,13 @@ describe 'Factory B', ->
     it 'should include a method that sets how Factory builds the document', ->
       bee = new FactoryB default: testJSON
       bee.setModel TestClass
-      buildMethod = (data, model)-> new model data
-      buildSpy = jasmine.createSpy('buildMethod').andCallFake buildMethod
-      bee.setBuild buildSpy
+      flag = false
+      buildMethod = (data, model)->
+        flag = true
+        new model data
+      bee.setBuild buildMethod
       expect(bee.build()).toEqual expectedDocument
-      expect(buildSpy).toHaveBeenCalled()
+      expect(flag).toEqual true
 
   describe 'had bugs such that', ->
 
