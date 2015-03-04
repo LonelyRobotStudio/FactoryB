@@ -2,7 +2,7 @@
   var FactoryB,
     __slice = [].slice;
 
-  module.exports = FactoryB = (function() {
+  FactoryB = (function() {
     var _clone, _cloneArray, _cloneDate, _cloneObject, _mutate;
 
     FactoryB._factories = {};
@@ -157,5 +157,9 @@
     return FactoryB;
 
   })();
+
+  try {
+    module.exports = FactoryB;
+  } catch (_error) {}
 
 }).call(this);
