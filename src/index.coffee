@@ -63,5 +63,8 @@ class FactoryB
         new @model @get mutators
 
   keys: -> Object.keys(@data)
+
+this.FactoryB = FactoryB
+
 try
   module.exports = FactoryB

@@ -158,6 +158,8 @@
 
   })();
 
+  this.FactoryB = FactoryB;
+
   try {
     module.exports = FactoryB;
   } catch (_error) {}
